@@ -1,0 +1,38 @@
+<svg viewBox="100 330 810 355" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(100, 330)">
+    <g transform="translate(180, 0)">
+      <rect x="0" y="15" width="160" height="160" rx="25" ry="25" fill="#4a2c7a"/>
+      <g transform="translate(0, 10)">
+        <rect x="0" y="0" width="160" height="160" rx="25" ry="25" fill="#6E41B5"/>
+        <text x="80" y="108" font-family="Arial, sans-serif" font-weight="bold" font-size="80px" fill="#FFFFFF" text-anchor="middle">W</text>
+      </g>
+    </g>
+    <g transform="translate(0, 180)">
+      <rect x="0" y="15" width="160" height="160" rx="25" ry="25" fill="#c0c0c0"/>
+      <rect x="0" y="0" width="160" height="160" rx="25" ry="25" fill="#e8e8e8"/>
+      <text x="80" y="108" font-family="Arial, sans-serif" font-weight="bold" font-size="80px" fill="#777777" text-anchor="middle">A</text>
+    </g>
+    <g transform="translate(180, 180)">
+      <rect x="0" y="15" width="160" height="160" rx="25" ry="25" fill="#c0c0c0"/>
+      <rect x="0" y="0" width="160" height="160" rx="25" ry="25" fill="#e8e8e8"/>
+      <text x="80" y="108" font-family="Arial, sans-serif" font-weight="bold" font-size="80px" fill="#777777" text-anchor="middle">S</text>
+    </g>
+    <g transform="translate(360, 180)">
+      <rect x="0" y="15" width="160" height="160" rx="25" ry="25" fill="#c0c0c0"/>
+      <rect x="0" y="0" width="160" height="160" rx="25" ry="25" fill="#e8e8e8"/>
+      <text x="80" y="108" font-family="Arial, sans-serif" font-weight="bold" font-size="80px" fill="#777777" text-anchor="middle">D</text>
+    </g>
+  </g>
+  <g transform="translate(750, 330)">
+    <g transform="translate(0, 0)">
+      <rect x="0" y="15" width="160" height="160" rx="25" ry="25" fill="#c0c0c0"/>
+      <rect x="0" y="0" width="160" height="160" rx="25" ry="25" fill="#e8e8e8"/>
+      <path d="M80,40 L120,100 L40,100 Z" fill="#777777"/>
+    </g>
+    <g transform="translate(0, 180)">
+      <rect x="0" y="15" width="160" height="160" rx="25" ry="25" fill="#c0c0c0"/>
+      <rect x="0" y="0" width="160" height="160" rx="25" ry="25" fill="#e8e8e8"/>
+      <path d="M80,120 L40,60 L120,60 Z" fill="#777777"/>
+    </g>
+  </g>
+</svg>

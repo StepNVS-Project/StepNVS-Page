@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StepNVS - Anonymous Project Page</title>
+    <style>
+        :root {
+            --bg-white: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+
+            padding: 5rem 2rem;
+        }
+
+
+        video,
+        img {
+            width: 100%;
+            border-radius: 0;
+
+            background-color: #e5e5e5;
+            display: block;
+            box-shadow: none;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .media-label {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            text-align: left;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .media-label strong {
+            font-weight: 600;
+            color: #000;
+        }
+
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: left;
+            color: #ffffff;
+            padding-left: 5vw;
+            padding-bottom: 10vh;
+            width: 100%;
+        }
+
+        .title-main {
+            font-size: 5.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.03em;
+            color: #ffffff;
+        }
+
+        .title-sub {
+            font-size: clamp(1.2rem, 3vw, 2.5rem);
+            font-weight: 600;
+            color: #ffffff;
+            white-space: nowrap;
+            letter-spacing: -0.01em;
+        }
+
+        @keyframes badge-entrance {
+            0% {
+                opacity: 0;
+                transform: translateX(30px) scale(0.95);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        .conference-badge {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 14px 24px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            animation: badge-entrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+            animation-delay: 0.5s;
+        }
+
+        .conference-badge:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .conference-badge img {
+            height: 38px;
+            width: auto;
+            margin-bottom: 0;
+            background: transparent;
+            border-radius: 0;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .conference-badge .badge-text-container {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.25;
+        }
+
+        .conference-badge .submitted-to {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 2px;
+        }
+
+        .conference-badge .conference-name {
+            color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 768px) {
+            .conference-badge {
+                top: 25px;
+                right: 25px;
+                padding: 10px 18px;
+            }
+
+            .conference-badge img {
+                height: 28px;
+            }
+
+            .conference-badge .submitted-to {
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+            }
+
+            .conference-badge .conference-name {
+                font-size: 1.05rem;
+            }
+        }
+
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            width: 100%;
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: none;
+            border: 1px solid var(--border-color);
+
+        }
+
+        th,
+        td {
+            padding: 16px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.1rem;
+        }
+
+        th {
+            background-color: var(--bg-light-gray);
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        @media (max-width: 992px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .title-main {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* --- Carousel Styles --- */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: #f3f4f6;
+            margin-bottom: 1rem;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .carousel-slide video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            margin-bottom: 0;
+        }
+
+        .grid-stack-4 {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 2rem 5%;
+        }
+
+        .freetraj-grid {
+            padding-top: 0.5rem !important;
+        }
+
+        .grid-2-cols {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            padding: 2rem 5%;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-stack-4,
+            .grid-2-cols {
+                padding: 1rem 3rem;
+            }
+
+            .grid-2-cols {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* --- Trajectory Icon Styles --- */
+        .trajectory-icon-header {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            padding: 0.5rem 5% 0.5rem 5%;
+            width: 100%;
+            background-color: transparent;
+        }
+
+        .trajectory-icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trajectory-icon-item img {
+            width: 110px;
+            height: auto;
+            margin-bottom: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+
+        @media (max-width: 768px) {
+            .trajectory-icon-header {
+                padding: 2rem 3rem 0.5rem 3rem;
+            }
+
+            .trajectory-icon-item img {
+                width: 70px;
+            }
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: background 0.3s;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel-btn.prev {
+            left: 10px;
+        }
+
+        .carousel-btn.next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #d1d5db;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-dot.active {
+            background-color: #4b5563;
+        }
+
+        /* --- Comparison Grid Styles --- */
+        .comparison-grid-1x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            width: 100%;
+            padding: 1rem 2rem;
+        }
+
+        .comparison-item {
+            position: relative;
+            width: 100%;
+        }
+
+        .comparison-label {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 5;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .trajectory-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1rem 0;
+            color: var(--text-main);
+        }
+
+        /* Shrink videos specifically for Arbitrary section */
+        .arbitrary-section .comparison-grid-1x2 {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0.5rem 1rem;
+            gap: 1.2rem;
+        }
+
+        .arbitrary-section .comparison-item {
+            width: 85%;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        .arbitrary-section .comparison-item video {
+            width: 100%;
+            margin-bottom: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .arbitrary-section .trajectory-title {
+            font-size: 1.35rem;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero">
+        <a href="https://neurips.cc/" target="_blank" class="conference-badge">
+            <img src="./project_page/images/neurips_logo.png" alt="NeurIPS Logo">
+            <div class="badge-text-container">
+                <span class="submitted-to">Submitted to</span>
+                <span class="conference-name">NeurIPS 2026</span>
+            </div>
+        </a>
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="./project_page/videos/stacked_scenes_front_16x9.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="title-main">StepNVS:</div>
+            <div class="title-sub">Taming Video Diffusion Model for One-Step Driving Novel View Synthesis</div>
+        </div>
+    </header>
+
+    <section class="container">
+        <h2>StepNVS generates high-fidelity novel views in one step.</h2>
+
+        <div>
+            <img src="./project_page/images/teaser_1.png" alt="Teaser">
+            <div class="media-label">
+                <strong>Left:</strong> Compared to multi-step baseline methods that rely on iterative denoising, our
+                approach efficiently generates the novel view in one step. <br>
+                <strong>Right:</strong> Compared to multi-step baselines that follow long, curved denoising
+                trajectories, StepNVS reaches the target prediction directly in a single step.
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="padding-top: 5rem;">
+
+        <!-- Category 1: Lateral Novel Trajectory -->
+        <div style="margin-bottom: 4rem;">
+            <h2>Novel Trajectory Synthesis</h2>
+
+            <div class="carousel-container" id="lateral-carousel">
+                <div class="trajectory-icon-header">
+                    <div class="trajectory-icon-item">
+                        <img src="./project_page/images/icons/icon_left.svg" alt="Left">
+                    </div>
+                    <div class="trajectory-icon-item">
+                        <img src="./project_page/images/icons/icon_left.svg" alt="Left">
+                    </div>
+                    <div class="trajectory-icon-item">
+                        <img src="./project_page/images/icons/icon_original.svg" alt="Original">
+                    </div>
+                    <div class="trajectory-icon-item">
+                        <img src="./project_page/images/icons/icon_right.svg" alt="Right">
+                    </div>
+                    <div class="trajectory-icon-item">
+                        <img src="./project_page/images/icons/icon_right.svg" alt="Right">
+                    </div>
+                </div>
+                <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                <div class="carousel-track" id="lateral-track">
+                    <!-- Slide 1: 4 vertical rows -->
+                    <div class="carousel-slide">
+                        <div class="grid-stack-4 freetraj-grid">
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/lateral/scene_1.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/lateral/scene_2.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/lateral/scene_51_back.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/lateral/scene_4.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <!-- Slide 2: 4 vertical rows -->
+                    <div class="carousel-slide">
+                        <div class="grid-stack-4 freetraj-grid">
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/lateral/scene_13.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/lateral/scene_51_front_right.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/lateral/scene_51.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/lateral/scene_51_front_left.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+
+            <div class="carousel-dots" id="lateral-dots">
+                <div class="carousel-dot active" onclick="setSlide(0)"></div>
+                <div class="carousel-dot" onclick="setSlide(1)"></div>
+            </div>
+
+            <p
+                style="text-align: left; margin-top: 2rem; color: var(--text-muted); font-size: 1.1rem; line-height: 1.6;">
+                We synthesize novel views by applying lateral shifts along the Y-axis. From left to right, the views
+                transition smoothly from <strong>-2m and -1m left shifts</strong>, through the <strong>Ground Truth
+                    (Center)</strong>, to <strong>+1m and +2m right shifts</strong>.
+            </p>
+
+        </div>
+
+        <!-- Category 2: Multi-Camera Lateral -->
+        <div style="margin-bottom: 4rem;">
+            <h2>Surround-View Synthesis </h2>
+
+            <div class="carousel-container" id="surround-carousel">
+                <button class="carousel-btn prev" onclick="moveSlideSurround(-1)">&#10094;</button>
+                <div class="carousel-track" id="surround-track">
+                    <!-- Scene 51 -->
+                    <div class="carousel-slide">
+                        <video autoplay loop muted playsinline>
+                            <source src="./project_page/videos/surround/scene_51.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <!-- Scene 4 -->
+                    <div class="carousel-slide">
+                        <video autoplay loop muted playsinline>
+                            <source src="./project_page/videos/surround/scene_4.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <!-- Scene 29 -->
+                    <div class="carousel-slide">
+                        <video autoplay loop muted playsinline>
+                            <source src="./project_page/videos/surround/scene_29.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <!-- Scene 32 -->
+                    <div class="carousel-slide">
+                        <video autoplay loop muted playsinline>
+                            <source src="./project_page/videos/surround/scene_32.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <!-- Scene 43 -->
+                    <div class="carousel-slide">
+                        <video autoplay loop muted playsinline>
+                            <source src="./project_page/videos/surround/scene_43.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <button class="carousel-btn next" onclick="moveSlideSurround(1)">&#10095;</button>
+            </div>
+
+            <div class="carousel-dots" id="surround-dots">
+                <div class="carousel-dot active" onclick="setSlideSurround(0)"></div>
+                <div class="carousel-dot" onclick="setSlideSurround(1)"></div>
+                <div class="carousel-dot" onclick="setSlideSurround(2)"></div>
+                <div class="carousel-dot" onclick="setSlideSurround(3)"></div>
+                <div class="carousel-dot" onclick="setSlideSurround(4)"></div>
+            </div>
+
+            <p style="text-align: left; margin-top: 2rem; color: var(--text-muted); font-size: 1.1rem;">
+                We generate consistent 6-camera surround-view sequences across various lateral shifts, maintaining
+                temporal stability and visual coherence.
+            </p>
+
+        </div>
+
+        <div style="margin-bottom: 4rem;">
+            <h2>Free Trajectory Control</h2>
+
+            <div class="carousel-container" id="freetraj-carousel">
+                <div class="trajectory-icon-header">
+                    <div class="trajectory-icon-item">
+                        <img src="./project_page/images/icons/icon_original.svg" alt="Original">
+                    </div>
+                    <div class="trajectory-icon-item">
+                        <img src="./project_page/images/icons/icon_backward.svg" alt="Backward">
+                    </div>
+                    <div class="trajectory-icon-item">
+                        <img src="./project_page/images/icons/icon_forward.svg" alt="Forward">
+                    </div>
+                    <div class="trajectory-icon-item">
+                        <img src="./project_page/images/icons/icon_down.svg" alt="Down">
+                    </div>
+                    <div class="trajectory-icon-item">
+                        <img src="./project_page/images/icons/icon_up.svg" alt="Up">
+                    </div>
+                </div>
+                <button class="carousel-btn prev" onclick="moveSlideFreeTraj(-1)">&#10094;</button>
+                <div class="carousel-track" id="freetraj-track">
+                    <!-- Slide 1: 4 vertical rows -->
+                    <div class="carousel-slide">
+                        <div class="grid-stack-4 freetraj-grid">
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/free_traj/scene_1_front.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/free_traj/scene_1_back.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/free_traj/scene_2_front.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/free_traj/scene_2_back.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <!-- Slide 2: 4 vertical rows -->
+                    <div class="carousel-slide">
+                        <div class="grid-stack-4 freetraj-grid">
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/free_traj/scene_4_front.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/free_traj/scene_4_back.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/free_traj/scene_13_front.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/free_traj/scene_13_back.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <!-- Slide 3: remaining (2 rows) -->
+                    <div class="carousel-slide">
+                        <div class="grid-stack-4 freetraj-grid">
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/free_traj/scene_51_front.mp4" type="video/mp4">
+                            </video>
+                            <video autoplay loop muted playsinline>
+                                <source src="./project_page/videos/free_traj/scene_56_back.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" onclick="moveSlideFreeTraj(1)">&#10095;</button>
+            </div>
+
+            <div class="carousel-dots" id="freetraj-dots">
+                <div class="carousel-dot active" onclick="setSlideFreeTraj(0)"></div>
+                <div class="carousel-dot" onclick="setSlideFreeTraj(1)"></div>
+                <div class="carousel-dot" onclick="setSlideFreeTraj(2)"></div>
+            </div>
+
+            <p
+                style="text-align: left; margin-top: 2rem; color: var(--text-muted); font-size: 1.1rem; line-height: 1.6;">
+                StepNVS also allow for diverse control over forward/backward (X-axis) and vertical (Z-axis) camera
+                movements.
+                From left to right, we show the <strong>Original Trajectory</strong>, <strong>Backward 1m</strong>,
+                <strong>Forward 1m</strong>, <strong>Down 1m</strong>, and <strong>Up 1m</strong>.
+            </p>
+
+        </div>
+
+        <!-- Category 4: Arbitrary Trajectory -->
+        <div style="margin-bottom: 4rem;" class="arbitrary-section">
+            <h2>Arbitrary Trajectory Simulation</h2>
+
+            <div class="carousel-container" id="arbitrary-carousel">
+                <button class="carousel-btn prev" onclick="moveSlideArbitrary(-1)">&#10094;</button>
+                <div class="carousel-track" id="arbitrary-track">
+
+                    <!-- Slide 1: Bump -->
+                    <div class="carousel-slide">
+                        <div class="trajectory-title">What if the vehicle encounters a speed bump?</div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/bump_front_gt_s1.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/bump_front_gen_s1.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/bump_front_gt_s2.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/bump_front_gen_s2.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/bump_front_gt_s4.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/bump_front_gen_s4.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Lane Change Double -->
+                    <div class="carousel-slide">
+                        <div class="trajectory-title">What if the vehicle performs a double lane change?</div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_double_front_gt_s1.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_double_front_gen_s1.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_double_front_gt_s2.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_double_front_gen_s2.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_double_front_gt_s4.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_double_front_gen_s4.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Lane Change Oscillate -->
+                    <div class="carousel-slide">
+                        <div class="trajectory-title">What if the vehicle is weaving through lanes?</div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_oscillate_front_gt_s1.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_oscillate_front_gen_s1.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_oscillate_front_gt_s2.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_oscillate_front_gen_s2.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_oscillate_front_gt_s4.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/lanechange_oscillate_front_gen_s4.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: Slalom -->
+                    <div class="carousel-slide">
+                        <div class="trajectory-title">What if a slalom maneuver is performed?</div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/slalom_front_gt_s1.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/slalom_front_gen_s1.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/slalom_front_gt_s2.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/slalom_front_gen_s2.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/slalom_front_gt_s4.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/slalom_front_gen_s4.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5: Sweep Center -->
+                    <div class="carousel-slide">
+                        <div class="trajectory-title">What if the vehicle follows a curved trajectory?</div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/sweep_center_front_gt_s1.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/sweep_center_front_gen_s1.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/sweep_center_front_gt_s2.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/sweep_center_front_gen_s2.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="comparison-grid-1x2">
+                            <div class="comparison-item">
+                                <div class="comparison-label">Original Trajectory</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/sweep_center_front_gt_s4.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-label">Synthesized Result (StepNVS)</div>
+                                <video autoplay loop muted playsinline>
+                                    <source src="./project_page/videos/arbitrary/sweep_center_front_gen_s4.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="carousel-btn next" onclick="moveSlideArbitrary(1)">&#10095;</button>
+            </div>
+
+            <div class="carousel-dots" id="arbitrary-dots">
+                <div class="carousel-dot active" onclick="setSlideArbitrary(0)"></div>
+                <div class="carousel-dot" onclick="setSlideArbitrary(1)"></div>
+                <div class="carousel-dot" onclick="setSlideArbitrary(2)"></div>
+                <div class="carousel-dot" onclick="setSlideArbitrary(3)"></div>
+                <div class="carousel-dot" onclick="setSlideArbitrary(4)"></div>
+            </div>
+
+            <p style="text-align: left; margin-top: 2rem; color: var(--text-muted); font-size: 1.1rem;">
+                We simulate complex driving behaviors, such as consecutive lane changes and slalom maneuvers,
+                demonstrating that StepNVS maintains temporal consistency and spatial accuracy across
+                arbitrary, long-range trajectories.
+            </p>
+        </div>
+
+        <!-- Category 5: Spatial NVS -->
+        <div style="margin-bottom: 6rem;">
+            <h2>Bullet-Time View Synthesis</h2>
+
+            <div class="carousel-container" id="spatial-carousel">
+                <div class="carousel-track" id="spatial-track">
+                    <div class="carousel-slide">
+                        <div class="grid-2-cols">
+                            <video id="spatial-video-1" autoplay loop muted playsinline
+                                style="width: 100%; border-radius: 8px;">
+                                <source src="./project_page/videos/spatial/scene_1.mp4" type="video/mp4">
+                            </video>
+                            <video id="spatial-video-2" autoplay loop muted playsinline
+                                style="width: 100%; border-radius: 8px;">
+                                <source src="./project_page/videos/spatial/scene_2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="text-align: left; margin-top: 2rem; color: var(--text-muted); font-size: 1.1rem;">
+                We create "bullet-time" rendering effects by seamlessly altering the viewpoint while maintaining a fixed
+                timestamp.
+            </p>
+        </div>
+
+        <div style="margin-top: 4rem; margin-bottom: 3rem;">
+            <h2 style="text-align: center;">Comparison with Baseline Methods</h2>
+
+        <!-- <div style="margin-top: 3rem; margin-bottom: 4rem;">
+            <img src="./project_page/images/step-compare.png" alt="Step Comparison">
+            <div class="media-label">
+                <strong>Comparison of the Multi-step Baseline Model (a) and Our One-Step Model (b).</strong> Note the
+                distortions highlighted in the red box in the multi-step model.
+            </div>
+        </div> -->
+
+        <div style="margin-bottom: 4rem;">
+            <img src="./project_page/images/compare.png" alt="Qualitative Comparison">
+            <div class="media-label">
+                <strong>Qualitative Comparison across Different Scenes.</strong> Our method preserves clearer scene
+                structures and better visual quality compare with the reconstruction-based and multi-step methods across
+                diverse driving scenarios.
+            </div>
+        </div>
+
+        <div style="margin-bottom: 4rem;">
+            <img src="./project_page/images/compare_traj.png" alt="Trajectory Synthesis">
+            <div class="media-label">
+                <strong>Comparison on Novel Trajectory Synthesis.</strong> We visualize the synthesized views under
+                laterally shifted trajectories (1m/2m/4m). Our one-step method generates high-quality details for road
+                elements, including lane markings and surrounding vehicles, while reconstruction-based methods suffer
+                from severe artifacts, and multi-step methods require iterative denoising to achieve comparable results.
+            </div>
+        </div>
+
+        <!-- <div style="margin-bottom: 4rem;">
+            <img src="./project_page/images/front_vis.png" alt="Visual Consistency">
+            <div class="media-label">
+                <strong>Visual Consistency with the Reference Trajectory.</strong> Compared with the ground-truth video
+                on the reference trajectory (center), our synthesized views under lateral shifts (left/right columns)
+                maintain high visual consistency with the original scene.
+            </div>
+        </div>
+
+        <div>
+            <img src="./project_page/images/y_translation_visual1.png" alt="Surround View">
+            <div class="media-label">
+                <strong>Surround-View Visualization on Novel Trajectories.</strong> We visualize generated results
+                across all six surround-view cameras. Our method consistently synthesizes the driving scenes under
+                lateral trajectory shifts, maintaining cross-view consistency for autonomous driving simulation.
+            </div>
+        </div> -->
+    </section>
+
+
+
+    <footer class="text-center"
+        style="padding: 3rem 2rem; border-top: 1px solid var(--border-color); margin-top: 3rem;">
+        <p style="font-size: 0.875rem; margin-bottom: 0;">NeurIPS 2026 Anonymous Submission. Best viewed on desktop
+            browsers.</p>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 2; // 2 slides (4 videos each)
+
+        function updateCarousel() {
+            const track = document.getElementById('lateral-track');
+            const dots = document.querySelectorAll('#lateral-dots .carousel-dot');
+
+            // Move the track by 100% per slide
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function moveSlide(direction) {
+            currentSlide = currentSlide + direction;
+            if (currentSlide < 0) {
+                currentSlide = totalSlides - 1; // Loop to end
+            } else if (currentSlide >= totalSlides) {
+                currentSlide = 0; // Loop to start
+            }
+            updateCarousel();
+        }
+
+        function setSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        // --- Surround Carousel Logic ---
+        let currentSlideSurround = 0;
+        const totalSlidesSurround = 5; // 5 videos, 1 per slide
+
+        function updateCarouselSurround() {
+            const track = document.getElementById('surround-track');
+            const dots = document.querySelectorAll('#surround-dots .carousel-dot');
+
+            // Move the track by 100% per slide
+            track.style.transform = `translateX(-${currentSlideSurround * 100}%)`;
+
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index === currentSlideSurround) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function moveSlideSurround(direction) {
+            currentSlideSurround = currentSlideSurround + direction;
+            if (currentSlideSurround < 0) {
+                currentSlideSurround = totalSlidesSurround - 1; // Loop to end
+            } else if (currentSlideSurround >= totalSlidesSurround) {
+                currentSlideSurround = 0; // Loop to start
+            }
+            updateCarouselSurround();
+        }
+
+        function setSlideSurround(index) {
+            currentSlideSurround = index;
+            updateCarouselSurround();
+        }
+
+        // --- Free Trajectory Carousel Logic ---
+        let currentSlideFreeTraj = 0;
+        const totalSlidesFreeTraj = 3; // 3 slides (4 + 4 + 2)
+
+        function updateCarouselFreeTraj() {
+            const track = document.getElementById('freetraj-track');
+            const dots = document.querySelectorAll('#freetraj-dots .carousel-dot');
+
+            // Move the track by 100% per slide
+            track.style.transform = `translateX(-${currentSlideFreeTraj * 100}%)`;
+
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index === currentSlideFreeTraj) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function moveSlideFreeTraj(direction) {
+            currentSlideFreeTraj = currentSlideFreeTraj + direction;
+            if (currentSlideFreeTraj < 0) {
+                currentSlideFreeTraj = totalSlidesFreeTraj - 1; // Loop to end
+            } else if (currentSlideFreeTraj >= totalSlidesFreeTraj) {
+                currentSlideFreeTraj = 0; // Loop to start
+            }
+            updateCarouselFreeTraj();
+        }
+
+        function setSlideFreeTraj(index) {
+            currentSlideFreeTraj = index;
+            updateCarouselFreeTraj();
+        }
+
+        // --- Spatial Section Logic ---
+        // (No carousel needed for single slide)
+
+        // --- Arbitrary Carousel Logic ---
+        let currentSlideArbitrary = 0;
+        const totalSlidesArbitrary = 5;
+
+        function updateCarouselArbitrary() {
+            const track = document.getElementById('arbitrary-track');
+            const dots = document.querySelectorAll('#arbitrary-dots .carousel-dot');
+
+            track.style.transform = `translateX(-${currentSlideArbitrary * 100}%)`;
+
+            dots.forEach((dot, index) => {
+                if (index === currentSlideArbitrary) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function moveSlideArbitrary(direction) {
+            currentSlideArbitrary = currentSlideArbitrary + direction;
+            if (currentSlideArbitrary < 0) {
+                currentSlideArbitrary = totalSlidesArbitrary - 1;
+            } else if (currentSlideArbitrary >= totalSlidesArbitrary) {
+                currentSlideArbitrary = 0;
+            }
+            updateCarouselArbitrary();
+        }
+
+        function setSlideArbitrary(index) {
+            currentSlideArbitrary = index;
+            updateCarouselArbitrary();
+        }
+    </script>
+</body>
+
+</html>
